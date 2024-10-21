@@ -1,4 +1,5 @@
 import sys
+from tkinter import *
 import tkinter as tk
 
 
@@ -57,5 +58,8 @@ root = tk.Tk()
 root.title("Overlapped Window")  # ウィンドウのタイトルを設定
 root.geometry("400x300")  # ウィンドウのサイズを設定
 # calculator = Calculator(root)
-root.iconbitmap("icon.ico")
+label = tk.Label(root, text="Hello, Tkinter!")
+label.pack()
+button = tk.Button(root, text="Click me!")
+button.pack()
 root.mainloop()

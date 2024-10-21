@@ -1,10 +1,15 @@
+import sys
 import tkinter as tk
 
 
 class Calculator:
     def __init__(self, root):
         self.root = root
-        self.root.title("簡単な電卓")
+        root.title("Overlapped Window")  # ウィンドウのタイトルを設定
+        root.geometry("400x300")  # ウィンドウのサイズを設定
+        # ウィジェットの配置などをここに追加
+        label = tk.Label(root, text="これはオーバーラップウィンドウです", font=("Arial", 14))
+        label.pack(pady=20)
         self.expression = ""
 
         self.display = tk.Entry(root, font=("Arial", 20), bd=10, insertwidth=2, width=14, borderwidth=4)
@@ -48,7 +53,9 @@ class Calculator:
             self.display.insert(tk.END, self.expression)
 
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    calculator = Calculator(root)
-    root.mainloop()
+root = tk.Tk()
+root.title("Overlapped Window")  # ウィンドウのタイトルを設定
+root.geometry("400x300")  # ウィンドウのサイズを設定
+# calculator = Calculator(root)
+root.iconbitmap("icon.ico")
+root.mainloop()

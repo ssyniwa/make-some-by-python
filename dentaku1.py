@@ -6,11 +6,9 @@ import tkinter as tk
 class Calculator:
     def __init__(self, root):
         self.root = root
-        root.title("Overlapped Window")  # ウィンドウのタイトルを設定
-        root.geometry("400x300")  # ウィンドウのサイズを設定
+        root.title("Calculator basic")  # ウィンドウのタイトルを設定
+        root.geometry("300x400")  # ウィンドウのサイズを設定
         # ウィジェットの配置などをここに追加
-        label = tk.Label(root, text="これはオーバーラップウィンドウです", font=("Arial", 14))
-        label.pack(pady=20)
         self.expression = ""
 
         self.display = tk.Entry(root, font=("Arial", 20), bd=10, insertwidth=2, width=14, borderwidth=4)
@@ -55,11 +53,6 @@ class Calculator:
 
 
 root = tk.Tk()
-root.title("Overlapped Window")  # ウィンドウのタイトルを設定
-root.geometry("400x300")  # ウィンドウのサイズを設定
-# calculator = Calculator(root)
-label = tk.Label(root, text="Hello, Tkinter!")
-label.pack()
-button = tk.Button(root, text="Click me!")
-button.pack()
+calculator = Calculator(root)
+
 root.mainloop()

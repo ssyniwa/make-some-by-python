@@ -1,4 +1,6 @@
 "
+#Ubuntuローカル環境で動作を確認、基本電卓モードと科学技術計算モードを選択し利用可能
+#科学技術計算モードはまだGUIアプリ化していないですが、アプリ化を進めます
 import sys
 from tkinter import *
 import tkinter as tk

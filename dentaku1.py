@@ -1,4 +1,5 @@
 "
+#Ubuntuローカル環境で動作を確認、GUIアプリとして機能する基本的な電卓
 import sys
 from tkinter import *
 import tkinter as tk

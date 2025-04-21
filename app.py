@@ -1,3 +1,5 @@
+# Ubuntuローカル環境で動作を確認
+# 長さや重さ、温度など単位変換を行うWebアプリケーションを作成
 from flask import Flask, render_template, request
 
 app = Flask(__name__)

@@ -1,9 +1,10 @@
 "
-#Ubuntuローカル環境で動作を確認、GUIアプリとして機能する基本的な電卓
+#Ubuntuローカル環境で動作を確認、基本電卓モードと科学技術計算モードを選択し利用可能
+#科学技術計算モードはまだGUIアプリ化していないですが、アプリ化を進めます
 import sys
 from tkinter import *
 import tkinter as tk
-
+import math
 
 class Calculator:
     def __init__(self, root):
@@ -54,8 +55,46 @@ class Calculator:
             self.display.insert(tk.END, self.expression)
 
 
-root = tk.Tk()
-calculator = Calculator(root)
+def scientific_calculator():
+    print("Select operation:")
+    print("1. Sine")
+    print("2. Cosine")
+    print("3. Tangent")
+    print("4. Logarithm")
+    print("5. Exponential")
 
-root.mainloop()
-"
+    choice = input("Enter choice(1/2/3/4/5): ")
+
+    num = float(input("Enter number: "))
+
+    if choice == '1':
+        print("Sin(", num, ") =", math.sin(math.radians(num)))
+    elif choice == '2':
+        print("Cos(", num, ") =", math.cos(math.radians(num)))
+    elif choice == '3':
+        print("Tan(", num, ") =", math.tan(math.radians(num)))
+    elif choice == '4':
+        print("Logarithm(", num, ") =", math.log(num))
+    elif choice == '5':
+        print("Exponential(", num, ") =", math.exp(num))
+    else:
+        print("Invalid input")
+
+while True:
+    print("Select mode:")
+    print("1. Basic Calculator")
+    print("2. Scientific Calculator")
+    print("3. Exit")
+    mode=input("Enter mode(1/2/3):")
+    if mode=='1':
+        root = tk.Tk()
+        calculator = Calculator(root)
+
+        root.mainloop()
+    elif mode == '2':
+        scientific_calculator()
+    elif mode == '3':
+        break
+    else:
+        print("Invalid input")
+"        

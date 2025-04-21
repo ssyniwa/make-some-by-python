@@ -1,5 +1,7 @@
 # Ubuntuローカル環境で動作を確認
 # 長さや重さ、温度など単位変換を行うWebアプリケーションを作成
+# htmlテンプレートを使用して、ユーザーが入力した値を変換する
+# 変換レートは例として定義しますが、実際のアプリケーションではAPIなどから取得することも考えられます。
 from flask import Flask, render_template, request
 
 app = Flask(__name__)

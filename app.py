@@ -47,7 +47,7 @@ def index():
                 else:
                     result = value / RATES[f'{to_unit}_to_{from_unit}']
             else:
-                error = f"'{from_unit}' から '{to_unit}' への変換レートが見つかりません。"
+                error = f"変換レートが見つかりません。"
 
         except ValueError:
             error = "数値を入力してください。"

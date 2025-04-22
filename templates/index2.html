@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>株価分析と予測</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <h1>株価分析と予測</h1>
+    <form method="POST">
+        <label for="ticker">ティッカーシンボル:</label>
+        <input type="text" id="ticker" name="ticker" required>
+        <label for="period">期間:</label>
+        <select id="period" name="period">
+            <option value="1mo">1ヶ月</option>
+            <option value="3mo">3ヶ月</option>
+            <option value="6mo">6ヶ月</option>
+            <option value="1y" selected>1年</option>
+            <option value="5y">5年</option>
+            <option value="max">最長</option>
+        </select>
+        <input type="submit" value="分析">
+    </form>
+
+    {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
+    {% if stock_data is not none %}
+    <h2>{{ request.form['ticker'].upper() }} の株価データ (直近5件)</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                {% for col in stock_data.columns %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in stock_data.tail().iterrows() %}
+            <tr>
+                <td>{{ index.strftime('%Y-%m-%d') }}</td>
+                {% for cell in row %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if plot_html %}
+    <h2>株価と予測</h2>
+    <div>
+        {{ plot_html|safe }}
+    </div>
+    {% endif %}
+</body>
+
+</html>

@@ -31,16 +31,20 @@ def train_model(df):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     model = LinearRegression()
     model.fit(X_train, y_train)
+    model.train_dates = df.index
     return model, None
 
 
 def predict_price(model, last_n_days=5):
     """直近のデータから将来の株価を予測する関数"""
-    if model is None:
+    if model is None or not hasattr(model, 'train_dates'):
         return None
-    last_date_index = model.n_samples_in_ - 1
-    future_dates = pd.DataFrame(data=range(last_date_index + 1, last_date_index + 1 + last_n_days)).values
-    predicted_prices = model.predict(future_dates)
+    last_date = model.train_dates[-1]
+    future_dates = pd.to_datetime([last_date + pd.Timedelta(days=i+1) for i in range(last_n_days)])
+    # 予測用の特徴量を作成（学習データと同じ形式にする必要あり）
+    last_index = len(model.train_dates) - 1
+    future_indices = [[last_index + i + 1] for i in range(last_n_days)]
+    predicted_prices = model.predict(future_indices)
     return predicted_prices
 
 

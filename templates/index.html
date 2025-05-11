@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>単位変換ツール</title>
+</head>
+
+<body>
+    <h1>単位変換ツール</h1>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <div>
+            <label for="value">値:</label>
+            <input type="text" name="value" id="value" value="{{ value | default('') }}" required>
+        </div>
+        <div>
+            <label for="from_unit">変換元:</label>
+            <select name="from_unit" id="from_unit">
+                {% for category, unit_list in units.items() %}
+                <optgroup label="{{ category }}">
+                    {% for unit in unit_list %}
+                    <option value="{{ unit }}" {% if from_unit==unit %}selected{% endif %}>{{ unit }}</option>
+                    {% endfor %}
+                </optgroup>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="to_unit">変換先:</label>
+            <select name="to_unit" id="to_unit">
+                {% for category, unit_list in units.items() %}
+                <optgroup label="{{ category }}">
+                    {% for unit in unit_list %}
+                    <option value="{{ unit }}" {% if to_unit==unit %}selected{% endif %}>{{ unit }}</option>
+                    {% endfor %}
+                </optgroup>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">変換</button>
+    </form>
+
+    {% if result is not none %}
+    <h2>結果: {{ value }} {{ from_unit }} は {{ result }} {{ to_unit }} です</h2>
+    {% endif %}
+</body>
+
+</html>

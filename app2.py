@@ -6,13 +6,15 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from alpha_vantage.timeseries import TimeSeries
 
 app = Flask(__name__)
-
+ts = TimeSeries(key='WFUI819DRSBAZFMW')
 
 def fetch_stock_data(ticker, period):
     """株価データを取得する関数"""
-    data = yf.download(ticker, period=period, auto_adjust=True)
+    #data = yf.download(ticker, period=period, auto_adjust=True)
+    data, meta_data = ts.get_daily(symbol=ticker, outputsize='compact')
     return data
 
 
